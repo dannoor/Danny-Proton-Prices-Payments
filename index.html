@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071a30">
+<title>Proton Brunei | Danny Nordin</title>
+<style>
+:root{--navy:#071a30;--blue:#174ea6;--red:#a8323b;--redbg:#f9e9ea;--gold:#806000;--goldbg:#fff3bd;--green:#16803d;--ink:#182230;--muted:#64748b;--line:#dbe2ea;--bg:#f4f7fb}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+header{background:var(--navy);color:white;padding:25px 18px 22px;text-align:center}header .brand{font-weight:900;font-size:clamp(1.5rem,6vw,2rem);letter-spacing:.04em}header .sub{color:#d6e1ee;font-size:.85rem;letter-spacing:.08em;margin-top:4px}header h1{font-size:1.3rem;margin:18px 0 2px}header p{margin:4px 0;color:#d6e1ee}header .phone{font-weight:800;font-size:1.1rem;color:white}main{max-width:820px;margin:auto;padding:16px;display:grid;gap:16px}.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:0 4px 18px #0b25400b}.panel h2{font-size:1.15rem;margin:0 0 14px}.models{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.model{border:1px solid var(--line);background:#fff;border-radius:14px;padding:13px;text-align:left;cursor:pointer;color:var(--ink)}.model.active{border:2px solid var(--blue);background:#f0f5ff;padding:12px}.model .caricon{font-size:2rem;display:block;margin-bottom:5px}.model strong{display:block}.model small{color:var(--muted)}label{display:block;font-size:.86rem;font-weight:700;margin-bottom:6px}select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:10px;background:white;font-size:1rem;color:var(--ink)}.field{margin:13px 0}.toggle{display:flex;gap:6px;padding:4px;background:#eef2f7;border-radius:12px}.toggle button{flex:1;border:0;background:transparent;padding:10px 7px;border-radius:9px;font-weight:750;color:#465569;cursor:pointer}.toggle button.active{background:white;color:var(--blue);box-shadow:0 1px 5px #0001}.pricebox{background:#edf3fb;border-radius:14px;padding:16px;margin-top:13px}.pricebox .big{font-size:2rem;font-weight:850;color:var(--blue);line-height:1.15}.pricebox .line{display:flex;justify-content:space-between;gap:10px;margin-top:9px;font-size:.94rem}.muted{color:var(--muted)}.offer{border:1px solid;border-radius:14px;overflow:hidden;margin:12px 0}.offerhead{padding:13px 14px}.offerhead h3{font-size:1rem;margin:0 0 3px}.offerhead p{font-size:.82rem;margin:0}.offerbody{padding:14px}.redoffer{border-color:#e4b8bc}.redoffer .offerhead{background:var(--redbg);color:var(--red)}.yellowoffer{border-color:#e4d18a}.yellowoffer .offerhead{background:var(--goldbg);color:var(--gold)}.benefit{display:flex;gap:9px;margin:9px 0}.check{font-weight:900;color:var(--green)}.offer button,.primary,.secondary{width:100%;border-radius:10px;padding:11px 12px;font-size:.95rem;font-weight:750;cursor:pointer}.offer button{border:1px solid var(--line);background:#fff;color:var(--ink);margin-top:8px}.offer button.selected{background:var(--blue);color:#fff;border-color:var(--blue)}.financegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#edf3fb;border-radius:12px;padding:13px}.stat small{display:block;color:#53667f}.stat strong{display:block;font-size:1.25rem;color:#103d73;margin-top:4px}.primary{background:var(--green);color:white;border:0;text-decoration:none;display:block;text-align:center;margin-top:14px}.secondary{background:white;border:1px solid var(--line);color:var(--ink);margin-top:9px}.note{font-size:.78rem;color:var(--muted);margin-top:12px}.details summary{font-weight:750;cursor:pointer}.hours{display:flex;justify-content:space-between;gap:15px;margin:8px 0}.footer{text-align:center;color:var(--muted);font-size:.8rem;padding:0 12px 24px}
+@media(min-width:640px){main{grid-template-columns:1fr 1fr;align-items:start}.wide{grid-column:1/-1}.models{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:380px){main{padding:10px}.panel{padding:13px}.financegrid{grid-template-columns:1fr}.models{gap:7px}.model{padding:10px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">PROTON BRUNEI</div>
+  <div class="sub">ECON MOTORS SDN BHD · JALAN BERIBI</div>
+  <h1>Danny Nordin</h1>
+  <p>Sales Consultant</p>
+  <p class="phone">☏ 744-1968</p>
+  <p>Beribi, Brunei Darussalam</p>
+</header>
+<main>
+<section class="panel wide">
+  <h2>Choose your Proton</h2>
+  <div class="models" id="models"></div>
+</section>
+<section class="panel">
+  <h2>Vehicle and price</h2>
+  <div class="field"><label for="variant">Variant</label><select id="variant"></select></div>
+  <div class="toggle" role="group" aria-label="Price type">
+    <button id="promoBtn" class="active" type="button">Discounted price</button>
+    <button id="listBtn" type="button">List price</button>
+  </div>
+  <div class="pricebox">
+    <div class="muted" id="vehicleLabel"></div>
+    <div class="big" id="selectedPrice"></div>
+    <div class="line"><span class="muted">List price</span><strong id="listPrice"></strong></div>
+    <div class="line"><span class="muted">Discounted price</span><strong id="discountPrice"></strong></div>
+  </div>
+  <p class="note">Choose the offer below to see the matching price. The two promotions are alternatives and should not be combined unless the dealership confirms otherwise.</p>
+</section>
+<section class="panel">
+  <h2>Monthly financing estimate</h2>
+  <div class="field"><label for="finance">Financing plan</label>
+    <select id="finance">
+      <option value="7">7 years · 4% p.a.</option>
+      <option value="bibd">10 years · BIBD</option>
+      <option value="baiduri">10 years · Baiduri</option>
+    </select>
+  </div>
+  <div class="financegrid">
+    <div class="stat"><small>Monthly instalment</small><strong id="monthly"></strong></div>
+    <div class="stat"><small>Minimum salary on flyer</small><strong id="salary"></strong></div>
+  </div>
+  <p class="note">Figures are transcribed from the supplied flyer. Confirm the final instalment, eligibility and terms with the finance provider.</p>
+</section>
+<section class="panel wide">
+  <h2>Promotions and offers</h2>
+  <div id="offers"></div>
+</section>
+<section class="panel wide">
+  <h2>Contact Danny</h2>
+  <p class="muted">Ask about this model, its promotion or financing eligibility.</p>
+  <a class="primary" id="whatsapp" href="https://wa.me/6737441968" target="_blank" rel="noopener">☏ Chat with Danny on WhatsApp</a>
+  <button class="secondary" id="copy" type="button">Copy vehicle and offer details</button>
+  <p class="note">WhatsApp: 744-1968 · Offers are subject to confirmation by Econ Motors and applicable terms and conditions.</p>
+</section>
+<section class="panel wide">
+  <details class="details">
+    <summary>Dealership opening hours (please confirm before visiting)</summary>
+    <div class="hours"><span>Monday–Thursday</span><span>8 am–5 pm</span></div>
+    <div class="hours"><span>Friday</span><span>8 am–12 pm, 2–5 pm</span></div>
+    <div class="hours"><span>Saturday</span><span>8 am–5 pm</span></div>
+    <div class="hours"><span>Sunday</span><span>Closed</span></div>
+  </details>
+</section>
+</main>
+<div class="footer">PROTON BRUNEI · Vehicle pricing and promotions guide</div>
+<script>
+const cars = [
+{m:"Saga MC3",v:"Standard",l:16800,p:15950,yl:256,yp:244,bl:220,bp:208,dl:240,dp:216,sl:630,sp:620,discount:"B$850 cash voucher / discount",tint:false},
+{m:"Saga MC3",v:"Premium",l:18800,p:18300,yl:287,yp:279,bl:246,bp:240,dl:269,dp:261,sl:660,sp:650,discount:"B$500 cash voucher / discount",tint:false},
+{m:"S70",v:"Premium",l:25800,p:24000,yl:394,yp:366,bl:338,bp:314,dl:353,dp:328,sl:754,sp:730,discount:"B$1,800 cash voucher / discount",tint:false,package:"B$500 cash voucher + 5 months free instalments + window tinting",free:5,packageVoucher:"B$500 cash voucher",packageTint:true},
+{m:"X50",v:"Executive",l:27499,p:23999,yl:420,yp:366,bl:360,bp:314,dl:376,dp:285,sl:775,sp:755,discount:"B$3,500 cash voucher / discount + window tinting",tint:true,package:"5 months free instalments + window tinting",free:5,packageTint:true},
+{m:"X50",v:"Premium",l:31500,p:27999,yl:480,yp:427,bl:412,bp:366,dl:412,dp:333,sl:845,sp:820,discount:"B$3,501 cash voucher / discount + window tinting",tint:true,package:"4 months free instalments + window tinting",free:4,packageTint:true},
+{m:"X50",v:"Flagship",l:34500,p:29999,yl:526,yp:458,bl:451,bp:392,dl:451,dp:357,sl:890,sp:870,discount:"B$4,501 cash voucher / discount + window tinting",tint:true,package:"8 months free instalments + window tinting",free:8,packageTint:true},
+{m:"X90",v:"Executive",l:39500,p:37000,yl:602,yp:564,bl:517,bp:484,dl:517,dp:484,sl:960,sp:930,discount:"B$2,500 cash voucher / discount + window tinting",tint:true,package:"B$1,000 cash voucher / discount + 2 months free instalments + window tinting",free:2,packageVoucher:"B$1,000 cash voucher / discount",packageTint:true},
+{m:"X90",v:"Premium",l:41500,p:39000,yl:633,yp:595,bl:543,bp:510,dl:543,dp:510,sl:1000,sp:960,discount:"B$2,500 cash voucher / discount + window tinting",tint:true,package:"B$1,000 cash voucher / discount + 2 months free instalments + window tinting",free:2,packageVoucher:"B$1,000 cash voucher / discount",packageTint:true},
+{m:"X90",v:"Flagship",l:43500,p:41000,yl:663,yp:625,bl:569,bp:536,dl:569,dp:536,sl:1030,sp:990,discount:"B$2,500 cash voucher / discount + window tinting",tint:true,package:"B$1,000 cash voucher / discount + 2 months free instalments + window tinting",free:2,packageVoucher:"B$1,000 cash voucher / discount",packageTint:true}
+];
+const icons={"Saga MC3":"🚘","S70":"🚙","X50":"🚙","X90":"🚙"};
+let model="S70", variant="Premium", priceType="promo", offerChoice="promo";
+const money=n=>"B$"+Number(n).toLocaleString("en-US");
+const byVariant=()=>cars.find(c=>c.m===model&&c.v===variant)||cars[0];
+function renderModels(){
+ const wrap=document.getElementById("models");wrap.innerHTML="";
+ [...new Set(cars.map(c=>c.m))].forEach(m=>{
+  const first=cars.find(c=>c.m===m);const b=document.createElement("button");b.type="button";b.className="model"+(m===model?" active":"");
+  b.innerHTML=`<span class="caricon">${icons[m]}</span><strong>${m}</strong><small>From ${money(Math.min(...cars.filter(c=>c.m===m).map(c=>c.p)))}</small>`;
+  b.onclick=()=>{model=m;variant=cars.find(c=>c.m===m).v;offerChoice="promo";priceType="promo";renderAll()};wrap.appendChild(b);
+ });
+}
+function renderVariants(){
+ const select=document.getElementById("variant");select.innerHTML="";
+ cars.filter(c=>c.m===model).forEach(c=>{const o=document.createElement("option");o.value=c.v;o.textContent=c.v;select.appendChild(o)});
+ select.value=variant;
+}
+function chooseOffer(which){offerChoice=which;priceType=which;renderAll()}
+function offerCard(kind,title,price,subtitle,items,cls){
+ const chosen=offerChoice===kind;
+ return `<article class="offer ${cls}"><div class="offerhead"><h3>${title}</h3><p>${subtitle}</p><div style="font-size:1.55rem;font-weight:850;margin-top:5px">${money(price)}</div></div><div class="offerbody"><strong>What the customer gets</strong>${items.map(t=>`<div class="benefit"><span class="check">✓</span><span>${t}</span></div>`).join("")}<button type="button" class="${chosen?"selected":""}" onclick="chooseOffer('${kind}')">${chosen?"Selected offer":"Select this offer"}</button></div></article>`;
+}
+function renderOffers(c){
+ let html=offerCard("promo","DEAL 1 · DISCOUNTED PRICE",c.p,"Red price on the flyer",[c.discount], "redoffer");
+ if(c.tint && !c.discount.toLowerCase().includes("tinting")){} 
+ if(c.package){
+  const items=[];
+  if(c.packageVoucher)items.push(c.packageVoucher);
+  if(c.free)items.push(`${c.free} months of free instalments`);
+  if(c.packageTint)items.push("Window tinting included");
+  html+=offerCard("list","DEAL 2 · OPTIONAL LIST-PRICE PACKAGE",c.l,"Black list price · Yellow-box promotion",items,"yellowoffer");
+  html+=`<p class="note">These are alternative promotions, not cumulative. The optional package does not include the discounted-price voucher unless it is specifically listed above.</p>`;
+ }else{
+  html+=`<div class="offer"><div class="offerbody"><strong>No separate optional yellow-box package shown</strong><p class="note">The supplied flyer does not list a separate package for this variant. Confirm any additional offers with the dealership.</p></div></div>`;
+ }
+ document.getElementById("offers").innerHTML=html;
+}
+function renderAll(){
+ renderModels();renderVariants();const c=byVariant();const promo=offerChoice==="promo";
+ document.getElementById("promoBtn").classList.toggle("active",promo);
+ document.getElementById("listBtn").classList.toggle("active",!promo);
+ document.getElementById("vehicleLabel").textContent=`${c.m} ${c.v} · ${promo?"Discounted price":"List-price package"}`;
+ document.getElementById("selectedPrice").textContent=money(promo?c.p:c.l);
+ document.getElementById("listPrice").textContent=money(c.l);
+ document.getElementById("discountPrice").textContent=money(c.p);
+ const f=document.getElementById("finance").value;
+ const monthly=f==="7"?(promo?c.yp:c.yl):f==="bibd"?(promo?c.bp:c.bl):(promo?c.dp:c.dl);
+ document.getElementById("monthly").textContent=money(monthly);
+ document.getElementById("salary").textContent=money(promo?c.sp:c.sl);
+ renderOffers(c);
+ const message=`Hi Danny, I'm interested in the Proton ${c.m} ${c.v}. Please tell me more about the ${promo?"discounted-price deal at "+money(c.p):"optional list-price package at "+money(c.l)}.`;
+ document.getElementById("whatsapp").href="https://wa.me/6737441968?text="+encodeURIComponent(message);
+}
+document.getElementById("variant").addEventListener("change",e=>{variant=e.target.value;offerChoice="promo";renderAll()});
+document.getElementById("promoBtn").addEventListener("click",()=>chooseOffer("promo"));
+document.getElementById("listBtn").addEventListener("click",()=>chooseOffer("list"));
+document.getElementById("finance").addEventListener("change",renderAll);
+document.getElementById("copy").addEventListener("click",async()=>{
+ const c=byVariant(),promo=offerChoice==="promo";
+ const text=`PROTON BRUNEI | Danny Nordin | WhatsApp https://wa.me/6737441968\n${c.m} ${c.v}\nDiscounted-price deal: ${money(c.p)} — ${c.discount}\n${c.package?"Optional list-price package: "+money(c.l)+" — "+c.package:"No separate optional package listed on supplied flyer."}\nSelected offer: ${money(promo?c.p:c.l)}`;
+ try{await navigator.clipboard.writeText(text);document.getElementById("copy").textContent="Copied!";}catch(e){window.prompt("Copy these details:",text)}
+});
+renderAll();
+</script>
+</body>
+</html>
